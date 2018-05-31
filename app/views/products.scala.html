@@ -1,0 +1,42 @@
+@(products : List[Product])(searchDisplay : String)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
+    <title>Products</title>
+</head>
+<body>
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-12 text-center display-3">
+            Products
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4 text-center">
+            <form method="GET">
+                <input type="text" name="searchCriteria" value="@searchDisplay">
+                <input type="submit" value="Search">
+            </form>
+            <br>
+            <table class="table-hover table-bordered">
+                <tr>
+                    <th class="col-md-9">Product Name</th>
+                    <th class="col-md-3">Unit Price</th>
+                </tr>
+                @for(product <- products) {
+                    <tr>
+                        <td><a href="product/@product.getProductId" class="text-info">@product.getProductName</a></td>
+                        <td>$@product.getUnitPrice</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
