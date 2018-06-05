@@ -2,6 +2,7 @@ package models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 
 @Entity
 public class Employee
@@ -14,6 +15,34 @@ public class Employee
     private String address;
     private String city;
     private String notes;
+    private String stateId;
+    private BigDecimal Salary;
+    private int titleOfCourtesyId;
+
+    public int getTitleOfCourtesyId()
+    {
+        return titleOfCourtesyId;
+    }
+
+    public BigDecimal getSalary()
+    {
+        return Salary;
+    }
+
+    public void setTitleOfCourtesyId(int titleOfCourtesyId)
+    {
+        this.titleOfCourtesyId = titleOfCourtesyId;
+    }
+
+    public String getStateId()
+    {
+        return stateId;
+    }
+
+    public void setStateId(String stateId)
+    {
+        this.stateId = stateId;
+    }
 
     public String getFirstName()
     {
@@ -43,5 +72,30 @@ public class Employee
     public int getEmployeeId()
     {
         return employeeId;
+    }
+
+    public void setFirstName(String firstName)
+    {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName)
+    {
+        this.lastName = lastName;
+    }
+
+    public void setAddress(String address)
+    {
+        this.address = address;
+    }
+
+    public void setCity(String city)
+    {
+        this.city = city;
+    }
+
+    public void setNotes(String notes)
+    {
+        this.notes = notes;
     }
 }

@@ -1,0 +1,37 @@
+@(employees : List[Employee])
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="/assets/lib/chart.js/Chart.bundle.min.js"></script>
+    <script src="/assets/lib/chart.js/utils.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/stylesheets/charthelper.css">
+    <script src="/assets/lib/jquery/jquery.min.js"></script>
+    <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
+    <title>Salary</title>
+</head>
+<body>
+@navbar.render("chart")
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-12 display-2 text-center">
+            Salaries
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row text-center">
+        <div class="col-12 text-center">
+            <canvas id="salaries" width="1000" height="400"></canvas>
+        </div>
+    </div>
+</div>
+<script id="chartData" type="text/javascript" src="/assets/javascripts/barchart.js"
+        data-labels='@for(i <- 0 to employees.size() - 1){@employees.get(i).getFirstName @employees.get(i).getLastName
+        @if(i < employees.size() - 1){,}}'
+        data-data = '@for(i <- 0 to employees.size() - 1){@employees.get(i).getSalary
+        @if(i < employees.size() - 1){,}}'></script>
+</body>
+</html>

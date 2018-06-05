@@ -16,6 +16,7 @@ libraryDependencies += "org.hibernate" % "hibernate-core" % "5.3.1.Final"
 libraryDependencies += "org.mariadb.jdbc" % "mariadb-java-client" % "2.2.5"
 
 libraryDependencies += "org.webjars" % "bootstrap" % "4.1.0"
+libraryDependencies += "org.webjars.bowergithub.chartjs" % "chart.js" % "2.7.2"
 
 // Test Database
 libraryDependencies += "com.h2database" % "h2" % "1.4.196"

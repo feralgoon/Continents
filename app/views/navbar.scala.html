@@ -1,0 +1,49 @@
+@(page : String)
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="nav navbar-nav">
+
+        @if("employees".equals(page)){
+        <li class="nav-item active">
+        } else {
+        <li class="nav-item">
+        }
+        <a class="nav-link" href="/../employees">Employees</a>
+        </li>
+        @if("products".equals(page)){
+        <li class="nav-item active">
+            } else {
+        <li class="nav-item">
+            }<a class="nav-link" href="/../products">Products</a></li>
+        @if("continents".equals(page)){
+        <li class="nav-item active">
+            } else {
+        <li class="nav-item">
+            }<a class="nav-link" href="/../continents">Continents</a></li>
+        @if("chart".equals(page)){
+        <li class="nav-item dropdown active">
+            } else {
+        <li class="nav-item dropdown">
+            }
+            <a class="nav-link dropdown-toggle" href="#" id="navbardropcharts" data-toggle="dropdown">
+                Charts
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/../chartdemo">Salaries</a>
+            </div>
+        </li>
+        @if("create".equals(page)){
+        <li class="nav-item dropdown active">
+            } else {
+        <li class="nav-item dropdown">
+            }
+            <a class="nav-link dropdown-toggle" href="#" id="navbardcreate" data-toggle="dropdown">
+                Create New...
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/../newtitleofcourtesy">Title of Courtesy</a>
+                <a class="dropdown-item" href="/../newcategory">Product Category</a>
+                <a class="dropdown-item" href="/../createemployee">Employee</a>
+            </div>
+        </li>
+    </ul>
+</nav>

@@ -1,28 +1,40 @@
-@(product : Product)
+@(product : Product)(categories : List[Category])
 <!DOCTYPE html>
+@import helper._
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
+    <script src="/assets/lib/jquery/jquery.min.js"></script>
+    <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
     <title>Product Detail</title>
 </head>
 <body>
+@navbar.render("products")
 <div class="jumbotron">
     <div class="row">
-        <div class="col-2 text-center">
-            <a href="/../products" class="btn btn-secondary btn-lg">
-                  <- Back to Products
-            </a>
-        </div>
-        <div class="col-8 text-center display-2">
+        <div class="col-12 text-center display-2">
             @product.getProductName
         </div>
     </div>
 </div>
 <div class="container">
+    <form method="POST">
+        @CSRF.formField
     <div class="row">
         <div class="col-md-6 offset-md-3 text-center">
+            Name:<input class="text-center form-control" name="productName" maxlength="40" id="productName" type="text" value="@product.getProductName"><br>
+            Category: <select name="category" id="category" class="form-control text-center">@product.getCategoryId
+            @for(category <- categories) {
+            @if(product.getCategoryId == category.getCategoryId){
+            <option value="@category.getCategoryId" selected="selected">@category.getCategoryName
+            </option>
+            } else {
+            <option value="@category.getCategoryId">@category.getCategoryName</option>
+            }
+            }
+        </select><br>
             <table class="table table-bordered">
                 <tr>
                     <th class="col-md-3">Price</th>
@@ -39,6 +51,10 @@
             </table>
         </div>
     </div>
+        <div class="row text-center">
+            <input class="btn" type="submit" value="Save Changes"/>
+        </div>
+    </form>
 </div>
 </body>
 </html>

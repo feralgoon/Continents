@@ -1,6 +1,8 @@
 package models;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 
@@ -15,6 +17,17 @@ public class Product
     private int unitsInStock;
     private int unitsOnOrder;
     private int reorderLevel;
+    private int categoryId;
+
+    public void setCategoryId(int categoryId)
+    {
+        this.categoryId = categoryId;
+    }
+
+    public int getCategoryId()
+    {
+        return categoryId;
+    }
 
     public String getProductName()
     {
@@ -44,5 +57,10 @@ public class Product
     public int getReorderLevel()
     {
         return reorderLevel;
+    }
+
+    public void setProductName(String productName)
+    {
+        this.productName = productName;
     }
 }
