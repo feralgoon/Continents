@@ -91,6 +91,15 @@ public class EmployeeController extends Controller
         return ok(views.html.employee.render(employee,titlesOfCourtesy,states));
     }
 
+    @Transactional
+    public Result deleteEmployee(int employeeId)
+    {
+        Employee employee = findEmployee(employeeId);
+        jpaApi.em().remove(employee);
+
+        return ok("bye " + employeeId);
+    }
+
     @Transactional(readOnly = true)
     private Employee findEmployee(Integer employeeId)
     {

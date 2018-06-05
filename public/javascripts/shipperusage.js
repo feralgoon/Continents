@@ -1,8 +1,6 @@
 var labels = document.getElementById("chartData").getAttribute("data-labels").split(",");
 var data = document.getElementById("chartData").getAttribute("data-data").split(",");
 var ctx = document.getElementById("shippers").getContext('2d');
-var ict_unit = [];
-var efficiency = [];
 var coloR = [];
 var dynamicColors = function() {
             var r = Math.floor(Math.random() * 255);
@@ -11,8 +9,6 @@ var dynamicColors = function() {
             return "rgb(" + r + "," + g + "," + b + ")";
          };
  for (var i in data) {
-             ict_unit.push("ICT Unit " + data[i].ict_unit);
-             efficiency.push(data[i].efficiency);
              coloR.push(dynamicColors());
           }
 var myChart = new Chart(ctx, {

@@ -21,6 +21,7 @@ POST    /employee/:id               controllers.EmployeeController.postEmployee(
 GET     /products                   controllers.ProductController.getProducts
 GET     /product/:id                controllers.ProductController.getProduct(id : Integer)
 POST    /product/:id                controllers.ProductController.postProduct(id : Integer)
+POST    /deleteemployee/:id         controllers.EmployeeController.deleteEmployee(id : Integer)
 
 GET     /newtitleofcourtesy         controllers.EmployeeController.getNewTitleOfCourtesy
 POST    /newtitleofcourtesy         controllers.EmployeeController.postNewTitleOfCourtesy
