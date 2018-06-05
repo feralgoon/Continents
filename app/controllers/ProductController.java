@@ -1,8 +1,6 @@
 package controllers;
 
-import models.Category;
-import models.Product;
-import models.ProductDetail;
+import models.*;
 import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.db.jpa.JPAApi;
@@ -106,5 +104,69 @@ public class ProductController extends Controller
         jpaApi.em().persist(category);
 
         return ok("Saved " + category.getCategoryId());
+    }
+
+    /*
+    SELECT c.categoryid, c.CategoryName, count(*) AS ProductsInCategory
+    FROM Product p
+    JOIN Category c ON p.categoryid = c.categoryid
+    GROUP BY c.categoryname
+    ORDER BY c.categoryname
+     */
+
+    @Transactional(readOnly = true)
+    public Result getProductsByCategory()
+    {
+        String sql =    "SELECT NEW ProductCountByCategory(c.categoryId, c.categoryName, COUNT(*)) " +
+                        "FROM Product p " +
+                        "JOIN Category c ON p.categoryId = c.categoryId " +
+                        "GROUP BY c.categoryName " +
+                        "ORDER BY c.categoryName";
+
+        List<ProductCountByCategory> productCounts = jpaApi.em().createQuery(sql,ProductCountByCategory.class).getResultList();
+
+        return ok(views.html.productcountbycategory.render(productCounts));
+    }
+
+    @Transactional(readOnly = true)
+    public Result getInStockByCategory()
+    {
+        String sql = "SELECT NEW InStockPerCategory(c.categoryId, c.categoryName,SUM(p.unitsInStock)) " +
+                        "FROM Product p " +
+                        "JOIN Category c ON p.categoryId = c.categoryId " +
+                        "GROUP BY c.categoryName " +
+                        "ORDER BY c.categoryName";
+        List<InStockPerCategory> stockCounts = jpaApi.em().createQuery(sql,InStockPerCategory.class).getResultList();
+
+        return ok(views.html.instockbycategory.render(stockCounts));
+    }
+
+    @Transactional(readOnly = true)
+    public Result getSalesByCategory()
+    {
+        String sql = "SELECT NEW SalesPerCategory(c.categoryId,c.categoryName,SUM(od.quantity * p.unitPrice)) " +
+                        "FROM Product p " +
+                        "JOIN Category c ON c.categoryId = p.categoryId " +
+                        "JOIN OrderDetail od ON od.productId = p.productId " +
+                        "GROUP BY c.categoryId,c.categoryName " +
+                        "ORDER BY c.categoryName";
+
+        List<SalesPerCategory> sales = jpaApi.em().createQuery(sql,SalesPerCategory.class).getResultList();
+
+        return ok(views.html.salesbycategory.render(sales));
+    }
+
+    @Transactional(readOnly = true)
+    public Result getShippersUsed()
+    {
+        String sql = "SELECT NEW ShipperUsage(s.shipperId,s.shipperName,COUNT(oh.shipperId)) " +
+                        "FROM OrderHeader oh " +
+                        "JOIN Shipper s ON oh.shipperId = s.shipperId " +
+                        "GROUP BY s.shipperName " +
+                        "ORDER BY s.shipperName";
+
+        List<ShipperUsage> shipperUsages = jpaApi.em().createQuery(sql,ShipperUsage.class).getResultList();
+
+        return ok(views.html.shipperusage.render(shipperUsages));
     }
 }
